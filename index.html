@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammed Nifal KP — Data Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#111315;
+    --bg-alt:#0C0D0F;
+    --panel:#191C1F;
+    --panel-alt:#1F2226;
+    --ink:#EDEDE6;
+    --muted:#8B8F8A;
+    --grid:#2A2D2F;
+    --grid-strong:#3A3E40;
+    --teal:#3FBFA0;
+    --teal-dim:#16302A;
+    --amber:#E39A5D;
+    --amber-dim:#2E241A;
+    --whatsapp:#3FBFA0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    padding-bottom:64px;
+  }
+  ::selection{background:var(--amber-dim); color:var(--amber);}
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .display{font-family:'Space Grotesk', sans-serif;}
+
+  /* ---------- Gutter grid ---------- */
+  .sheet{
+    position:relative;
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 56px 0 64px;
+  }
+  .col-gutter{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:22px;
+    display:flex;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--muted);
+    opacity:.5;
+    pointer-events:none;
+    padding:0 56px 0 64px;
+  }
+  .col-gutter span{flex:1; border-left:1px solid var(--grid); padding-left:4px;}
+  .row-gutter{
+    position:absolute;
+    left:0; top:0;
+    width:34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    color:var(--muted);
+    opacity:.4;
+    pointer-events:none;
+  }
+
+  /* ---------- Top bar ---------- */
+  header.topbar{
+    position:sticky; top:0; z-index:40;
+    background:rgba(17,19,21,.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--grid);
+  }
+  .namebox-row{
+    max-width:1180px;
+    margin:0 auto;
+    padding:12px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .namebox{
+    display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--teal);
+    border:1px solid var(--grid-strong);
+    background:var(--panel);
+    padding:6px 12px;
+    border-radius:3px;
+  }
+  .namebox .dot{width:6px; height:6px; border-radius:50%; background:var(--teal); box-shadow:0 0 8px var(--teal);}
+  .topbar-links{display:flex; gap:22px; font-family:'IBM Plex Mono', monospace; font-size:12.5px;}
+  .topbar-links a{text-decoration:none; color:var(--muted); border-bottom:1px solid transparent; padding-bottom:2px; transition:.15s;}
+  .topbar-links a:hover{color:var(--ink); border-color:var(--amber);}
+
+  /* ---------- Hero / Intro page ---------- */
+  .hero{
+    position:relative;
+    min-height:calc(100vh - 45px);
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:64px;
+    align-items:center;
+    padding:110px 0 80px;
+  }
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr; gap:40px;}
+    .profile-card{margin:0 auto;}
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted);
+    letter-spacing:.12em;
+    margin-bottom:18px;
+  }
+
+  /* ---------- Profile card ---------- */
+  .profile-card{
+    width:100%;
+    max-width:280px;
+    background:var(--panel);
+    border:1px solid var(--grid-strong);
+    border-radius:10px;
+    padding:28px 22px;
+    text-align:center;
+  }
+  .avatar{
+    width:108px; height:108px;
+    border-radius:50%;
+    margin:0 auto 20px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--teal-dim);
+    border:2px solid var(--teal);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    color:var(--teal);
+    letter-spacing:.02em;
+  }
+  .quote{
+    font-family:'Space Grotesk', sans-serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--ink);
+    line-height:1.5;
+    margin-bottom:20px;
+  }
+  .quote .qmark{color:var(--amber); font-size:22px; font-style:normal; display:block; margin-bottom:6px; font-family:Georgia,serif;}
+  .status-pill{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    justify-content:space-between;
+    background:var(--teal-dim);
+    border:1px solid var(--teal);
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:left;
+  }
+  .status-pill .txt{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--teal); line-height:1.4;}
+  .status-pill .dot{width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 8px var(--teal); flex:none; margin-right:6px;}
+  .hire-btn{
+    margin-top:14px;
+    display:block;
+    width:100%;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-decoration:none;
+    color:#08110E;
+    background:var(--amber);
+    padding:11px;
+    border-radius:6px;
+    transition:.15s;
+  }
+  .hire-btn:hover{opacity:.85;}
+
+  /* ---------- Stats row ---------- */
+  .stats-row{
+    display:flex;
+    gap:0;
+    margin-top:34px;
+    border-top:1px solid var(--grid-strong);
+    border-bottom:1px solid var(--grid-strong);
+  }
+  .stat{
+    flex:1;
+    padding:16px 18px;
+    border-right:1px solid var(--grid-strong);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Space Grotesk', sans-serif; font-size:28px; font-weight:700; color:var(--teal);}
+  .stat .lbl{font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--muted); letter-spacing:.05em; margin-top:2px;}
+  @media (max-width:520px){
+    .stats-row{flex-wrap:wrap;}
+    .stat{flex:1 1 50%; border-bottom:1px solid var(--grid-strong);}
+  }
+  .formula-bar{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--muted);
+    background:var(--panel);
+    border:1px solid var(--grid-strong);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 12px;
+    border-radius:3px;
+    margin-bottom:36px;
+    width:fit-content;
+  }
+  .formula-bar .fx{color:var(--amber); font-weight:600;}
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.8rem);
+    font-weight:600;
+    letter-spacing:-0.02em;
+    line-height:1.03;
+    max-width:14ch;
+  }
+  .hero .role{
+    margin-top:22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+    color:var(--teal);
+    display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .role .sep{color:var(--grid-strong);}
+  .name-meaning{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:10px;
+    font-style:italic;
+  }
+  .domain-badges{
+    display:flex;
+    gap:10px;
+    margin-top:16px;
+    flex-wrap:wrap;
+  }
+  .domain-badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--amber);
+    background:var(--amber-dim);
+    border:1px solid var(--amber);
+    padding:5px 12px;
+    border-radius:20px;
+  }
+  .hero p.lede{
+    margin-top:26px;
+    max-width:58ch;
+    font-size:17px;
+    color:#B7BAB5;
+  }
+  .cta-row{
+    margin-top:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:3px;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    border:1px solid var(--grid-strong);
+    transition:.15s ease;
+  }
+  .btn-solid{background:var(--ink); color:var(--bg-alt); border-color:var(--ink);}
+  .btn-solid:hover{background:var(--teal); border-color:var(--teal); color:#08110E;}
+  .btn-outline{background:transparent; color:var(--ink);}
+  .btn-outline:hover{border-color:var(--ink);}
+  .btn-whatsapp{background:transparent; color:var(--whatsapp); border-color:var(--teal-dim);}
+  .btn-whatsapp:hover{background:var(--teal-dim); border-color:var(--teal);}
+  .btn svg{width:14px; height:14px;}
+
+  .scroll-cue{
+    margin-top:64px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    display:flex; align-items:center; gap:8px;
+  }
+  .scroll-cue span.arrow{animation:bob 1.6s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0; border-top:1px solid var(--grid); position:relative;}
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:#08110E;
+    background:var(--teal);
+    padding:3px 8px;
+    border-radius:3px;
+    letter-spacing:.04em;
+  }
+  .section-head h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.7rem;
+    font-weight:600;
+  }
+  .section-head .range{
+    margin-left:auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted);
+  }
+
+  /* ---------- Ledger rows (skills / languages) ---------- */
+  .ledger{border:1px solid var(--grid-strong); border-radius:4px; overflow:hidden; background:var(--panel);}
+  .ledger-row{
+    display:grid;
+    grid-template-columns:34px 1fr auto;
+    align-items:center;
+    gap:16px;
+    padding:14px 18px;
+    border-bottom:1px solid var(--grid);
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row:nth-child(odd){background:var(--panel-alt);}
+  .ledger-idx{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted);}
+  .ledger-name{font-weight:500;}
+  .ledger-name small{display:block; color:var(--muted); font-weight:400; font-size:12.5px; margin-top:2px;}
+  .meter{display:flex; gap:4px;}
+  .meter i{width:16px; height:8px; border-radius:1px; background:var(--grid);}
+  .meter i.on{background:var(--teal);}
+
+  /* ---------- Two-column layout for skills/languages ---------- */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:28px;}
+  @media (max-width:820px){.two-col{grid-template-columns:1fr;}}
+
+  /* ---------- Certifications ---------- */
+  .cert-card{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    border:1px solid var(--grid-strong);
+    background:var(--panel);
+    border-radius:8px;
+    padding:16px;
+  }
+  .cert-thumb{
+    flex:none;
+    width:100px; height:72px;
+    border-radius:5px;
+    overflow:hidden;
+    background:var(--panel-alt);
+    border:1px dashed var(--grid-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px;
+    color:var(--muted);
+    text-align:center;
+    line-height:1.3;
+  }
+  .cert-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cert-body{flex:1;}
+  .cert-card h3{font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:600;}
+  .cert-card p{color:var(--muted); font-size:13.5px; margin-top:4px;}
+  .cert-link{
+    margin-top:8px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--teal);
+    text-decoration:none;
+  }
+  .cert-link:hover{text-decoration:underline;}
+  .cert-grid{display:flex; flex-direction:column; gap:14px;}
+
+  /* ---------- Project cards (image based) ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:820px){.project-grid{grid-template-columns:1fr;}}
+  .project-card{
+    border:1px solid var(--grid-strong);
+    background:var(--panel);
+    border-radius:8px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .project-thumb{
+    aspect-ratio:16/10;
+    background:var(--panel-alt);
+    border-bottom:1px dashed var(--grid-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    text-align:center;
+    padding:16px;
+    line-height:1.5;
+  }
+  .project-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .project-body{padding:20px;}
+  .project-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--amber);
+    letter-spacing:.05em;
+    margin-bottom:8px;
+    display:block;
+  }
+  .project-card h3{font-family:'Space Grotesk', sans-serif; font-size:17px; font-weight:600; margin-bottom:8px;}
+  .project-card p.desc{color:var(--muted); font-size:13.5px; margin-bottom:16px;}
+  .project-links{display:flex; flex-wrap:wrap; gap:10px;}
+  .project-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:5px;
+    border:1px solid var(--grid-strong);
+    color:var(--ink);
+    display:inline-flex; align-items:center; gap:6px;
+    transition:.15s;
+  }
+  .project-links a.primary{background:var(--teal); color:#08110E; border-color:var(--teal);}
+  .project-links a:hover{border-color:var(--teal);}
+
+  /* ---------- Internship card ---------- */
+  .intern-card{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    border:1px dashed var(--grid-strong);
+    background:var(--panel);
+    border-radius:8px;
+    padding:20px;
+  }
+  .intern-logo{
+    flex:none;
+    width:52px; height:52px;
+    border-radius:8px;
+    background:var(--panel-alt);
+    border:1px solid var(--grid-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    color:var(--muted);
+  }
+  .intern-card h3{font-family:'Space Grotesk', sans-serif; font-size:16px; font-weight:600;}
+  .intern-card .meta{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--muted); margin-top:4px;}
+
+  /* ---------- Projects ---------- */
+  .proj-table{border:1px dashed var(--grid-strong); border-radius:4px; overflow:hidden;}
+  .proj-header-row, .proj-row{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:12px;
+  }
+  .proj-header-row{
+    background:var(--panel-alt); color:var(--muted);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.05em;
+    padding:10px 18px;
+  }
+  .proj-row{
+    padding:22px 18px;
+    border-top:1px dashed var(--grid-strong);
+    align-items:center;
+  }
+  .proj-row:first-of-type{border-top:none;}
+  .pending .cell-a{color:var(--muted); font-style:italic; font-size:14px;}
+  .pending .cell-b, .pending .cell-c{font-family:'IBM Plex Mono', monospace; color:var(--grid-strong); font-size:12.5px;}
+  .proj-note{
+    margin-top:18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .proj-note .fx{color:var(--amber);}
+
+  /* ---------- Contact ---------- */
+  .contact-wrap{
+    display:flex;
+    flex-wrap:wrap;
+    gap:40px;
+    align-items:flex-end;
+    justify-content:space-between;
+  }
+  .contact-wrap h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    font-weight:600;
+    max-width:18ch;
+  }
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:'IBM Plex Mono', monospace; font-size:14px;}
+  .contact-links a{text-decoration:none; display:flex; align-items:center; gap:8px;}
+  .contact-links a:hover{color:var(--teal);}
+  footer.foot{
+    max-width:1180px; margin:0 auto; padding:26px 24px 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  /* ---------- Sheet tabs ---------- */
+  .sheet-tabs{
+    position:fixed;
+    bottom:0; left:0; right:0;
+    z-index:50;
+    background:var(--bg-alt);
+    border-top:1px solid var(--grid-strong);
+    display:flex;
+    align-items:flex-end;
+    padding:0 18px;
+    gap:4px;
+    height:44px;
+    overflow-x:auto;
+  }
+  .sheet-tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+    background:#161819;
+    border:1px solid var(--grid-strong);
+    border-bottom:none;
+    padding:9px 18px 8px;
+    border-radius:5px 5px 0 0;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .sheet-tab:hover{color:var(--ink);}
+  .sheet-tab.active{
+    background:var(--panel);
+    color:var(--teal);
+    font-weight:600;
+    height:44px;
+    box-shadow:0 -1px 0 var(--panel);
+  }
+
+  @media (max-width:720px){
+    .sheet{padding:0 20px;}
+    .col-gutter, .row-gutter{display:none;}
+    .proj-header-row, .proj-row{grid-template-columns:1fr; }
+    .ledger-row{grid-template-columns:24px 1fr; }
+    .meter{grid-column:1 / -1; margin-top:6px;}
+    .contact-wrap{align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="namebox-row">
+    <div class="namebox"><span class="dot"></span>A1 — MUHAMMED.NIFAL</div>
+    <nav class="topbar-links">
+      <a href="#skills">Skills</a>
+      <a href="#languages">Languages</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#projects">Projects</a>
+      <a href="#internships">Internships</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.linkedin.com/in/nifalkp-era25" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </div>
+</header>
+
+<main class="sheet" style="position:relative;">
+  <div class="col-gutter">
+    <span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span>
+  </div>
+
+  <section class="hero" id="home">
+
+    <div class="profile-card">
+      <div class="avatar">MNK</div>
+      <p class="quote"><span class="qmark">&ldquo;</span>Turning messy data into clear business decisions.</p>
+      <div class="status-pill">
+        <span><span class="dot"></span></span>
+        <span class="txt">AVAILABLE FOR OPPORTUNITIES<br>Open to Data Analyst roles</span>
+      </div>
+      <a class="hire-btn" href="mailto:nifal7890@gmail.com">Hire Me →</a>
+    </div>
+
+    <div>
+      <h1 class="display">Muhammed Nifal&nbsp;KP</h1>
+      <p class="name-meaning mono">"Muhammed" — Arabic, meaning "the praised one"</p>
+      <div class="domain-badges">
+        <span class="domain-badge">Data Analytics</span>
+        <span class="domain-badge">Business Analytics</span>
+      </div>
+      <div class="role">
+        <span>SQL</span><span class="sep">·</span>
+        <span>Excel</span><span class="sep">·</span>
+        <span>Python</span><span class="sep">·</span>
+        <span>Power BI</span><span class="sep">·</span>
+        <span>GA4 Analytics</span>
+      </div>
+      <p class="lede">I turn raw, messy data into numbers people can actually act on — cleaning it, querying it, and laying it out so the answer is obvious at a glance.</p>
+
+      <div class="stats-row">
+        <div class="stat"><div class="num mono">2</div><div class="lbl">PROJECTS</div></div>
+        <div class="stat"><div class="num mono">4</div><div class="lbl">CERTIFICATIONS</div></div>
+        <div class="stat"><div class="num mono">4</div><div class="lbl">LANGUAGES</div></div>
+        <div class="stat"><div class="num mono">0</div><div class="lbl">INTERNSHIPS</div></div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-solid" href="resume.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+          Download Résumé
+        </a>
+        <a class="btn btn-outline" href="mailto:nifal7890@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg>
+          Email Me
+        </a>
+        <a class="btn btn-whatsapp" href="https://wa.me/919946229335" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.2-.1-.5-.1-.7.1s-.7.9-.9 1.1-.4.2-.7.1a7.3 7.3 0 01-2.1-1.3 8 8 0 01-1.5-1.8c-.2-.3 0-.5.1-.6l.4-.5c.1-.1.2-.3.2-.4a.5.5 0 000-.5c-.1-.1-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6a1.1 1.1 0 00-.8.4 3.4 3.4 0 00-1 2.5 6 6 0 001.3 3.1 13.2 13.2 0 005 4.5c.7.3 1.3.5 1.7.6a4.1 4.1 0 001.9.1 3.1 3.1 0 002-1.4 2.6 2.6 0 00.2-1.4c-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-outline" href="https://www.linkedin.com/in/nifalkp-era25" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1 4.98 2.12 4.98 3.5zM.5 8h4V23h-4V8zm7.5 0h3.8v2.05h.05c.53-1 1.83-2.05 3.77-2.05C19.5 8 21 10.13 21 13.9V23h-4v-8.3c0-2-.04-4.6-2.8-4.6-2.8 0-3.2 2.2-3.2 4.45V23h-4V8z"/></svg>
+          LinkedIn
+        </a>
+        <a class="btn btn-outline" href="https://github.com/nifalkp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.2 4.2 0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 00-6.2 0C7.1 3.7 6 4 6 4a4.2 4.2 0 00-.1 3.2A4.6 4.6 0 004.6 10.4c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="scroll-cue mono">scroll to explore <span class="arrow">↓</span></div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <span class="tag mono">RANGE</span>
+      <h2 class="display">Skills</h2>
+      <span class="range mono">A1:C4</span>
+    </div>
+    <div class="ledger">
+      <div class="ledger-row">
+        <span class="ledger-idx mono">01</span>
+        <span class="ledger-name">SQL <small>Querying, joins, aggregation, window functions</small></span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">02</span>
+        <span class="ledger-name">Excel <small>Pivot tables, formulas, dashboards</small></span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">03</span>
+        <span class="ledger-name">Python <small>pandas, NumPy, Matplotlib, Seaborn, EDA</small></span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">04</span>
+        <span class="ledger-name">Google Analytics (GA4) <small>Web traffic & behaviour reporting</small></span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">05</span>
+        <span class="ledger-name">Power BI <small>Interactive dashboards & reporting</small></span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="languages">
+    <div class="section-head">
+      <span class="tag mono">RANGE</span>
+      <h2 class="display">Languages</h2>
+      <span class="range mono">A1:B4</span>
+    </div>
+    <div class="ledger">
+      <div class="ledger-row">
+        <span class="ledger-idx mono">01</span>
+        <span class="ledger-name">English</span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">02</span>
+        <span class="ledger-name">Malayalam</span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">03</span>
+        <span class="ledger-name">Tamil</span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+      </div>
+      <div class="ledger-row">
+        <span class="ledger-idx mono">04</span>
+        <span class="ledger-name">Arabic</span>
+        <span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="section-head">
+      <span class="tag mono">RANGE</span>
+      <h2 class="display">Certifications</h2>
+      <span class="range mono">A1:B1</span>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-thumb mono">PDF</div>
+        <div class="cert-body">
+          <h3>Google Analytics Certification</h3>
+          <p>Google Skillshop · ID: 185095484 · Issued Jun 2026</p>
+          <a class="cert-link" href="certificates/google_analytics.pdf" target="_blank" rel="noopener">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-thumb mono">PDF</div>
+        <div class="cert-body">
+          <h3>Data Visualization with Power BI</h3>
+          <p>Microsoft &amp; Great Learning · Completed Jun 2026</p>
+          <a class="cert-link" href="certificates/power_bi_great_learning.pdf" target="_blank" rel="noopener">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-thumb mono">PDF</div>
+        <div class="cert-body">
+          <h3>SQL (Basic)</h3>
+          <p>HackerRank · ID: 4F9654727328 · Earned Jun 2026</p>
+          <a class="cert-link" href="certificates/sql_basic_certificate.pdf" target="_blank" rel="noopener">View Certificate →</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-thumb">
+          <!-- Replace with: <img src="certificates/sla-data-analytics.jpg" alt="SLA Data Analytics Certificate"> -->
+          image<br>coming soon
+        </div>
+        <div class="cert-body">
+          <h3>Data Analytics</h3>
+          <p>SLA Institute · 2025–2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head">
+      <span class="tag mono">RANGE</span>
+      <h2 class="display">Projects</h2>
+      <span class="range mono">A1:C3</span>
+    </div>
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="project-thumb">
+          <!-- Replace with: <img src="projects/customer-behavior.png" alt="Customer Behavior Analysis dashboard"> -->
+          dashboard / report<br>screenshot goes here
+        </div>
+        <div class="project-body">
+          <span class="project-tag mono">PYTHON · EDA · DATA VISUALIZATION</span>
+          <h3>Customer Behavior Analysis</h3>
+          <p class="desc">Analyzed customer purchasing patterns using EDA and data cleaning, identified key customer segments and trends, and built visualizations to communicate insights for business decisions.</p>
+          <div class="project-links">
+            <a class="primary" href="#" target="_blank" rel="noopener">Open Live Dashboard</a>
+            <a href="#" target="_blank" rel="noopener">View Report</a>
+            <a href="https://github.com/nifalkp/customer-behavior-analysis" target="_blank" rel="noopener">View Code</a>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb">
+          <!-- Replace with: <img src="projects/employee-attrition.png" alt="Employee Attrition Analysis dashboard"> -->
+          dashboard / report<br>screenshot goes here
+        </div>
+        <div class="project-body">
+          <span class="project-tag mono">PYTHON · STATISTICAL ANALYSIS · DASHBOARDS</span>
+          <h3>Employee Attrition Analysis</h3>
+          <p class="desc">Analyzed workforce attrition data to identify turnover drivers, examined relationships between attrition and job role, income and satisfaction, and built dashboards with recommendations.</p>
+          <div class="project-links">
+            <a class="primary" href="#" target="_blank" rel="noopener">Open Live Dashboard</a>
+            <a href="#" target="_blank" rel="noopener">View Report</a>
+            <a href="https://github.com/nifalkp/employee-attrition-analysis" target="_blank" rel="noopener">View Code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="internships">
+    <div class="section-head">
+      <span class="tag mono">RANGE</span>
+      <h2 class="display">Internships</h2>
+      <span class="range mono">A1:C2</span>
+    </div>
+    <div class="intern-card">
+      <div class="intern-logo mono">LOGO</div>
+      <div>
+        <h3>Open to internship opportunities</h3>
+        <div class="meta">Company · Duration · Location — pending</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-wrap">
+      <h2>Got data that needs a story? Let's talk.</h2>
+      <div class="contact-links">
+        <a href="mailto:nifal7890@gmail.com">✉ nifal7890@gmail.com</a>
+        <a href="https://wa.me/919946229335" target="_blank" rel="noopener">⌥ WhatsApp — +91 99462 29335</a>
+        <a href="https://github.com/nifalkp" target="_blank" rel="noopener">⌥ github.com/nifalkp</a>
+        <a href="https://www.linkedin.com/in/nifalkp-era25" target="_blank" rel="noopener">⌥ linkedin.com/in/nifalkp-era25</a>
+        <a class="hire-btn" style="margin-top:8px;" href="mailto:nifal7890@gmail.com">Hire Me →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="row-gutter" id="rowGutter"></div>
+</main>
+
+<footer class="foot">
+  <span>© 2026 Muhammed Nifal KP</span>
+  <span>Sheet1 · Last saved just now</span>
+</footer>
+
+<nav class="sheet-tabs" id="sheetTabs">
+  <div class="sheet-tab active" data-target="home">Home</div>
+  <div class="sheet-tab" data-target="skills">Skills</div>
+  <div class="sheet-tab" data-target="languages">Languages</div>
+  <div class="sheet-tab" data-target="certifications">Certifications</div>
+  <div class="sheet-tab" data-target="projects">Projects</div>
+  <div class="sheet-tab" data-target="internships">Internships</div>
+  <div class="sheet-tab" data-target="contact">Contact</div>
+</nav>
+
+<script>
+  const rowGutter = document.getElementById('rowGutter');
+  let rows = '';
+  for(let i=1;i<=70;i++){ rows += `<div style="height:26px;border-top:1px solid var(--grid);padding-left:4px;">${i}</div>`; }
+  rowGutter.innerHTML = rows;
+
+  const tabs = document.querySelectorAll('.sheet-tab');
+  const sections = [...tabs].map(t => document.getElementById(t.dataset.target));
+
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      document.getElementById(tab.dataset.target).scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        tabs.forEach(t=>t.classList.remove('active'));
+        const match = [...tabs].find(t=>t.dataset.target === entry.target.id);
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+
+  sections.forEach(s=> s && observer.observe(s));
+</script>
+
+</body>
+</html>
