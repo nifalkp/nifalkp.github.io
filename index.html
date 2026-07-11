@@ -429,6 +429,45 @@
   .project-thumb-link:hover{background:var(--teal-dim);}
   .project-thumb-link svg{width:30px; height:30px; opacity:.8;}
 
+  /* ---------- Stat pills + mini bars on project cards ---------- */
+  .stat-pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:14px 0;
+  }
+  .stat-pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--teal);
+    background:var(--teal-dim);
+    border:1px solid var(--teal);
+    padding:5px 12px;
+    border-radius:20px;
+  }
+  .mini-bars{
+    margin:14px 0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .mini-bar-row .mini-bar-label{
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:4px;
+  }
+  .mini-bar-row .mini-bar-label b{color:var(--ink); font-weight:600;}
+  .mini-bar-track{
+    height:7px;
+    background:var(--grid);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .mini-bar-fill{height:100%; background:var(--teal); border-radius:4px;}
+  .mini-bar-fill.amber{background:var(--amber);}
+
   .project-card{
     border:1px solid var(--grid-strong);
     background:var(--panel);
@@ -836,6 +875,11 @@
           <span class="project-tag mono">PYTHON · EDA · POWER BI</span>
           <h3>Customer Behavior Analysis</h3>
           <p class="desc">Cleaned and analyzed a customer shopping dataset — fixed missing values, standardized types and column names, and identified purchasing segments and trends, visualized in Power BI.</p>
+          <div class="stat-pills">
+            <span class="stat-pill">Fully Cleaned</span>
+            <span class="stat-pill">0 Missing Values</span>
+            <span class="stat-pill">Power BI Ready</span>
+          </div>
           <div class="project-links">
             <a href="https://github.com/nifalkp/nifalkp.github.io/tree/main/projects/customer-behavior-analysis" target="_blank" rel="noopener">View Code</a>
           </div>
@@ -850,6 +894,21 @@
           <span class="project-tag mono">SQL · PYTHON · POWER BI</span>
           <h3>Employee Attrition Analysis</h3>
           <p class="desc">Queried and analyzed employee data to explain a 16.12% attrition rate (237 employees) — found overtime, job role, and a $2,046 average income gap between stayed vs. left as key drivers.</p>
+          <div class="stat-pills">
+            <span class="stat-pill">Attrition: 16.12%</span>
+            <span class="stat-pill">237 Left</span>
+            <span class="stat-pill">Gap: $2,046</span>
+          </div>
+          <div class="mini-bars">
+            <div class="mini-bar-row">
+              <div class="mini-bar-label"><span>Avg Income — Stayed</span><b>$6,833</b></div>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%"></div></div>
+            </div>
+            <div class="mini-bar-row">
+              <div class="mini-bar-label"><span>Avg Income — Left</span><b>$4,787</b></div>
+              <div class="mini-bar-track"><div class="mini-bar-fill amber" style="width:70%"></div></div>
+            </div>
+          </div>
           <div class="project-links">
             <a href="https://github.com/nifalkp/nifalkp.github.io/tree/main/projects/employee-attrition-analysis" target="_blank" rel="noopener">View Code</a>
           </div>
@@ -864,6 +923,20 @@
           <span class="project-tag mono">SQL · PYTHON · BALL-BY-BALL DATA</span>
           <h3>Sanju Samson — IPL Performance Analysis</h3>
           <p class="desc">Analyzed 4,000+ ball-by-ball IPL deliveries (2013–2026) to break down batting performance by season, match phase, and bowler matchup — strike rate climbs from 124 in Powerplay to 182 at Death.</p>
+          <div class="stat-pills">
+            <span class="stat-pill">Powerplay SR: 124</span>
+            <span class="stat-pill">Death SR: 182</span>
+          </div>
+          <div class="mini-bars">
+            <div class="mini-bar-row">
+              <div class="mini-bar-label"><span>Strike Rate — Powerplay</span><b>124.1</b></div>
+              <div class="mini-bar-track"><div class="mini-bar-fill" style="width:68%"></div></div>
+            </div>
+            <div class="mini-bar-row">
+              <div class="mini-bar-label"><span>Strike Rate — Death</span><b>182.4</b></div>
+              <div class="mini-bar-track"><div class="mini-bar-fill amber" style="width:100%"></div></div>
+            </div>
+          </div>
           <div class="project-links">
             <a href="https://github.com/nifalkp/nifalkp.github.io/blob/main/projects/samson-performance-analysis/sanju%20ipl.ipynb" target="_blank" rel="noopener">View Code</a>
           </div>
