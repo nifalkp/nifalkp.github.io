@@ -294,7 +294,7 @@
   <p class="tools reveal d2">SQL · Python · Power BI · Tableau · Excel · GA4</p>
   <div class="cta-row reveal d3">
     <a class="btn btn-primary" href="#work">View work</a>
-    <a class="btn btn-ghost" href="resume.pdf" download="resume.pdf">
+    <a class="btn btn-ghost" id="resumeBtn" href="resume.pdf" onclick="return downloadResume(event)">
       Download résumé
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
     </a>
@@ -507,5 +507,30 @@
   document.querySelectorAll('.count').forEach(el=>cio.observe(el));
 </script>
 
+<script>
+function downloadResume(e){
+  e.preventDefault();
+  fetch('resume.pdf', {cache:'no-store'})
+    .then(function(res){
+      if(!res.ok) throw new Error('Resume not found');
+      return res.blob();
+    })
+    .then(function(blob){
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    })
+    .catch(function(){
+      // fallback: just open it directly if fetch/blob fails for any reason
+      window.location.href = 'resume.pdf';
+    });
+  return false;
+}
+</script>
 </body>
 </html>
