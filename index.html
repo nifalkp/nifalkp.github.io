@@ -217,6 +217,7 @@
   .project:nth-of-type(2) .metric b{color:var(--amber);}
   .project:nth-of-type(3) .metric b{color:var(--pink);}
   .project:nth-of-type(4) .metric b{color:var(--violet);}
+  .project:nth-of-type(5) .metric b{color:var(--accent);}
   .metric span{font-size:12.5px; color:var(--muted);}
   .links{display:flex; gap:22px; flex-wrap:wrap; font-size:14px;}
   .links a{color:var(--accent); display:inline-flex; align-items:center; gap:5px; transition:gap .3s;}
@@ -312,10 +313,29 @@
   <section id="work">
     <div class="section-head reveal">
       <div class="eyebrow">Selected work</div>
-      <h2>Four datasets, four stories.</h2>
+      <h2>Five datasets, five stories.</h2>
       <p>Cleaned, queried, and visualized — each one built end to end.</p>
     </div>
-
+<article class="project flip reveal">
+  <div class="project-visual">
+    <a href="https://public.tableau.com/app/profile/muhammed.nifal.kp/viz/ecommercesale/Dashboard1" target="_blank">
+      <img src="projects/ecommerce_data/thumb.png" alt="E-Commerce Sales Analysis Tableau dashboard">
+    </a>
+  </div>
+  <div>
+    <div class="project-meta">Python · Tableau</div>
+    <h3>E-Commerce Sales Analysis</h3>
+    <p class="desc">Analyzed e-commerce transactions, customer buying patterns, and revenue trends across key product categories using Python and Tableau.</p>
+    <div class="metrics">
+      <div class="metric"><b>10K+</b><span>Transactions</span></div>
+      <div class="metric"><b>15%</b><span>Revenue Lift</span></div>
+    </div>
+    <div class="links">
+      <a href="https://public.tableau.com/app/profile/muhammed.nifal.kp/viz/ecommercesale/Dashboard1" target="_blank">View Dashboard</a>
+      <a class="quiet" href="https://github.com/nifalkp/nifalkp.github.io/tree/main/projects/ecommerce_data" target="_blank">View Code</a>
+    </div>
+  </div>
+</article>
     <article class="project reveal">
       <div class="project-visual">
         <a href="https://public.tableau.com/app/profile/muhammed.nifal.kp/viz/WalmartSalesAnalysis2010-2012/WalmartSalesAnalysis2010-2012" target="_blank" rel="noopener">
